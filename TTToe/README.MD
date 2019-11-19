@@ -4,6 +4,7 @@
 
 ```
 $ sudo apt-get install nodejs
+$ npm install 
 $ npm install -g expo-cli
 ```
 
