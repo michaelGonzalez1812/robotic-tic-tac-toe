@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, TouchableOpacity, Image } from 'react-native';
 import styles from './styles/gameBoard'
 import images from './images'
+import Header from './Header'
 
 // clase para manejar la logica y visualizacion del juego
 export class Game extends  React.Component {
@@ -23,6 +24,10 @@ export class Game extends  React.Component {
       playerTurn: 1,
       player1Logo: images.symbol1,
       player2Logo: images.symbol2,
+      player1Name: "Juanito",
+      player2Name: "Mora",
+      player2Score:1,
+      player2Score:1,
       //variable para la logica de gane del juego
       matrix: Array(9).fill(0),
 
@@ -155,7 +160,7 @@ export class Game extends  React.Component {
   render() {
     return (
       <View style={styles.container}>
-
+        
         <View style={styles.board}>
           <View
             style={styles.line}
@@ -242,6 +247,20 @@ export class Game extends  React.Component {
             />
           </TouchableOpacity>
         </View>
+
+        <View style={styles.info}>
+          <Header screenProps={
+            {
+              player1Logo:this.state.player1Logo,
+              player1Name:this.state.player1Name,
+              player1Score:this.state.player1Score,
+              player2Logo:this.state.player2Logo,
+              player2Name:this.state.player2Name,
+              player2Score:this.state.player2Score,
+            }
+            }/>
+        </View>
+
       </View>
     )
   }

@@ -171,4 +171,25 @@ export default StyleSheet.create({
       { translateY: -555},
     ]
   },
+
+  logos:{
+    margin: 5,
+    height: 20,
+    width: 20,
+    borderWidth: 0.5,
+    borderColor: '#000',
+    resizeMode: 'stretch',
+    alignSelf: 'center',
+  },
+  info:{
+    margin: 5,
+    flexDirection: 'column',
+    alignSelf: 'center',
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    alignSelf:'stretch',
+    alignSelf: 'center',
+  },
+
 })
