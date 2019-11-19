@@ -58,19 +58,127 @@ void printTicTacToe(char position, char logo){
   //file descriptor
   int fd = -1;
   //string to write
-  const char* str = "wwwwwwwwwwwwwwwwwwww\n\t";
+  const char* str = "\n\t";
 
   //init conection
   fd = serialport_init(serialport,baud);
   //flush the wrong data
   serialport_flush(fd);
 
-  if(strcmp(position, "0") == 0){
-    printf("sdfsdf");
+  if(position == '0'){
+    //write to de fie
+    if(logo == '1'){
+      //logo one line
+      serialport_write(fd,str);
+    }
+    else if(logo == '2'){
+      //logo 2 lines
+      serialport_write(fd,str);
+    }
+    else if(logo == '3'){
+      //logo 3 lines
+      serialport_write(fd,str);
+    }
+  }
+  else if(position == '1'){
+    //write to de fie
+    if(logo == '1'){
+      //logo one line
+      serialport_write(fd,str);
+    }
+    else if(logo == '2'){
+      //logo 2 lines
+      serialport_write(fd,str);
+    }
+    else if(logo == '3'){
+      //logo 3 lines
+      serialport_write(fd,str);
+    }
+  }
+  else if(position == '2'){
     //write to de fie
     serialport_write(fd,str);
   }
-  
+  else if(position == '3'){
+    //write to de fie
+    if(logo == '1'){
+      //logo one line
+      serialport_write(fd,str);
+    }
+    else if(logo == '2'){
+      //logo 2 lines
+      serialport_write(fd,str);
+    }
+    else if(logo == '3'){
+      //logo 3 lines
+      serialport_write(fd,str);
+    }
+  }
+  else if(position == '4'){
+    //write to de fie
+    if(logo == '1'){
+      //logo one line
+      serialport_write(fd,str);
+    }
+    else if(logo == '2'){
+      //logo 2 lines
+      serialport_write(fd,str);
+    }
+    else if(logo == '3'){
+      //logo 3 lines
+      serialport_write(fd,str);
+    }
+  }
+  else if(position == '5'){
+    //write to de fie
+    if(logo == '1'){
+      //logo one line
+      serialport_write(fd,str);
+    }
+    else if(logo == '2'){
+      //logo 2 lines
+      serialport_write(fd,str);
+    }
+    else if(logo == '3'){
+      //logo 3 lines
+      serialport_write(fd,str);
+    }
+  }
+  else if(position == '6'){
+    //write to de fie
+    if(logo == '1'){
+      //logo one line
+      serialport_write(fd,str);
+    }
+    else if(logo == '2'){
+      //logo 2 lines
+      serialport_write(fd,str);
+    }
+    else if(logo == '3'){
+      //logo 3 lines
+      serialport_write(fd,str);
+    }
+  }
+  else if(position == '7'){
+    //write to de fie
+    if(logo == '1'){
+      //logo one line
+      serialport_write(fd,str);
+    }
+    else if(logo == '2'){
+      //logo 2 lines
+      serialport_write(fd,str);
+    }
+    else if(logo == '3'){
+      //logo 3 lines
+      serialport_write(fd,str);
+    }
+  }
+  else if(position == '8'){
+    //write to de fie
+    serialport_write(fd,str);
+  }
+
   //close the file
   serialport_close(fd);
 }
