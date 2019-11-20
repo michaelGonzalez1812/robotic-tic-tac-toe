@@ -1,5 +1,5 @@
-// Home.js
-
+// Header.js
+// esta clase controla la informacion que se muestra durante el juego
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './styles/gameBoard'
@@ -10,7 +10,7 @@ export class Header extends React.Component {
             <View style={styles.infoContainer}>
                 <View >
                     <Text style={styles.info}>
-                        Player 2 {this.props.screenProps.player1Name}:
+                        Player 1 {this.props.screenProps.player1Name}:
                     </Text>
                     <Text style={styles.info}>
                         Logo:
