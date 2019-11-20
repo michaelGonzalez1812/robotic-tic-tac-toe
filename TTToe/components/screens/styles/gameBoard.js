@@ -174,12 +174,19 @@ export default StyleSheet.create({
 
   logos:{
     margin: 5,
-    height: 20,
-    width: 20,
+    height: 40,
+    width: 40,
     borderWidth: 0.5,
     borderColor: '#000',
     resizeMode: 'stretch',
     alignSelf: 'center',
+  },
+  logoSquare: {
+    height: 40,
+    width: 40,
+    resizeMode: 'stretch',
+    position:'relative',
+    
   },
   info:{
     margin: 5,
