@@ -5,6 +5,7 @@ import { View, Text, Button, TouchableOpacity, Image, Alert } from 'react-native
 import styles from './styles/gameBoard'
 import images from './images'
 import Header from './Header'
+import { Audio } from 'expo-av'
 //import SoundPlayer from 'react-native-sound-player'
 
 // clase para manejar la logica y visualizacion del juego
@@ -22,7 +23,7 @@ export class Game extends React.Component {
     // } catch (e) {
     // console.log(`cannot play the sound file`, e)
     // }
-
+    this.playbackInstance = null,
     this.state = {
       //variables para guardar el dibujo que se debe pintar en cada cuadro
       square1: images.symbol0,
@@ -45,13 +46,60 @@ export class Game extends React.Component {
       size:props.navigation.state.params.size,
       //variable para la logica de gane del juego
       matrix: Array(9).fill(0),
+      
 
     }
   }
+  //para cargar la instancia de audio en el momento que se inicia esta pantalla
+  componentDidMount() {
+    Audio.setAudioModeAsync({
+         allowsRecordingIOS: false,
+         interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+         playsInSilentModeIOS: true,
+         staysActiveInBackground: false,
+         shouldDuckAndroid: true,
+         interruptionModeAndroid:          Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+         playThroughEarpieceAndroid: false,
+     });
+     this._loadNewPlaybackInstance(true);
+  }
 
-  
+    async _loadNewPlaybackInstance(playing) {
+      if (this.playbackInstance != null) {
+          await this.playbackInstance.unloadAsync();
+          this.playbackInstance.setOnPlaybackStatusUpdate(null);
+          this.playbackInstance = null;
+       }
+       const source = require('../../assets/pokeMusic.mp3');
+       const initialStatus = {
+  //        Play by default
+            shouldPlay: true,
+  //        Control the speed
+            rate: 1.0,
+  //        Correct the pitch
+            shouldCorrectPitch: true,
+  //        Control the Volume
+            volume: 1.0,
+  //        mute the Audio
+            isMuted: false
+       };
+       const { sound, status } = await Audio.Sound.createAsync(
+           source,
+           initialStatus
+      );
+  //  Save the response of sound in playbackInstance
+      this.playbackInstance = sound;
+  //  Make the loop of Audio
+      this.playbackInstance.setIsLoopingAsync(true);
+  //  Play the Music
+      this.playbackInstance.playAsync();
+  }
 
-
+  componentWillUnmount() {
+    this.playbackInstance.unloadAsync();
+//  Check Your Console To verify that the above line is working
+    console.log('unmount');
+}
 
   
 
@@ -156,7 +204,7 @@ export class Game extends React.Component {
     
   }
 
-  //funcion para verificar si el trablero esta lleno
+  //funcion para verificar si el trablero esta lleno,caso de empate
   isFull(){
     let mtrx = this.state.matrix
     let full = 1//1 significa que no hay ningun espacio vacio
@@ -198,19 +246,43 @@ export class Game extends React.Component {
     let a7 = [mtrx[0], mtrx[4], mtrx[8]]
     let a8 = [mtrx[6], mtrx[4], mtrx[2]]
     let check = [a1, a2, a3, a4, a5, a6, a7, a8]
-    let win = this.state.win
     check.forEach(elemet => {
       if (elemet[0] == elemet[1] && elemet[1] == elemet[2]) {
         if(elemet[0]!=0){
           console.log('Win State detected')
-          this.setState({win:elemet[0]})
+          let win = elemet[0]
+          let sym
+          let sym2
+          if (win == 1) {
+            sym = this.state.player1Logo
+          }
+          else if (win == 2) {
+            sym = this.state.player2Logo
+          }
+          switch (sym) {//define la variable que se enviara la servidor para indicar el simbolo a pintar
+            case images.symbol1:
+              sym2 = 1
+              break
+            case images.symbol2:
+              sym2 = 2
+              break
+            case images.symbol3:
+              sym2 = 3
+              break
+            default:
+              sym2 = 0
+          }
+          console.log('Win State Sym2')
+          console.log(sym2)
+          this.setState({win:sym2})
+          console.log(this.state.win)
           this.handleWin(elemet[0])
         }
         
       }
     })
   }
-
+  //funcion para la logica de puntos y reinicio del juego en caso de gane
   handleWin = (winner) => {
     console.log('in hWin player'+String(winner))
     if(winner==1){
@@ -241,16 +313,12 @@ export class Game extends React.Component {
     'Winner!',
     message,
   )
-
-
- 
-
   }
 
   //funcion para comunicar estado del programa a travez de websockets
   sendState = (index, symbol) => {
     console.log('Sending message')
-    str = String(index) + String(symbol)
+    str = String(index) + String(symbol) + String(this.state.size) + String(this.state.win)
     console.log(str)
     try {
       this.props.screenProps.socketClient.send(JSON.stringify({ 

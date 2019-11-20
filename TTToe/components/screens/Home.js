@@ -19,7 +19,7 @@ export class Home extends React.Component {
   }
   
   
-  
+  //control del boton de seleccion de logo
   handleOnTouch = (player) => {
     if (player==1){
       switch (this.state.player1Logo){
@@ -49,7 +49,7 @@ export class Home extends React.Component {
       }
     }
   }
-
+  //control del bboton de inicio de juego
   startGame = () => {
     if(this.state.player1Logo==this.state.player2Logo){
       Alert.alert(
