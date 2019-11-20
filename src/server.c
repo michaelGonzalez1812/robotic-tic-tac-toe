@@ -52,13 +52,13 @@ void command_identifier(char commands[]){
 
 void printTicTacToe(char position, char logo){
   //port to connect
-  const char* serialport = "/dev/ttyACM0";
+  const char* serialport = "/dev/ttyACMard2";
   //baudio
   int baud = 9600;
   //file descriptor
   int fd = -1;
   //string to write
-  const char* str = "\n\t";
+  const char* str = "wwwwwww\n\t";
 
   //init conection
   fd = serialport_init(serialport,baud);

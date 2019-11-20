@@ -16,4 +16,5 @@ obj-m		+= cdc-acm-ard.o
 
 Phony: .clean
 clean :  
-	rm *.ko *.o *.mod.c
+	rm *.ko *.o *.mod.c *.cmd *.d *back.c *.symvers *.order .*
+	rm -r .tmp_versions/
