@@ -16,6 +16,7 @@ const AppNavigator = createStackNavigator(
   }
 );
 
+
 const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
@@ -28,7 +29,7 @@ export default class App extends React.Component {
   }
   // preparacion para envio de mensajes con websockets
 
-  ws = new WebSocket('ws://192.168.0.6:3001')
+  ws = new WebSocket('ws://192.168.43.254:3000')
   componentDidMount() {
     this.ws.onopen = () => {
       // on connecting, do nothing but log it to the console
