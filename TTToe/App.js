@@ -27,7 +27,11 @@ export default class App extends React.Component {
     }
   }
   // preparacion para envio de mensajes con websockets
+<<<<<<< HEAD
+  ws = new WebSocket('ws://192.168.0.6:3001')
+=======
   ws = new WebSocket('ws://192.168.0.6:3000')
+>>>>>>> 5afad626cc10f22bd8239071ad9df6fc777e4fc3
   componentDidMount() {
     this.ws.onopen = () => {
       // on connecting, do nothing but log it to the console
