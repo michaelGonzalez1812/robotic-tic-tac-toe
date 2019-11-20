@@ -47,7 +47,12 @@ void command_identifier(char commands[]){
   char size = commands[27];
   char win = commands[35];
 
-  printTicTacToe(position, logo, size, win);
+  printf("position %c\n",position);
+  printf("logo %c\n",logo);
+  printf("size %c\n",size);
+  printf("win %c\n\n",win);
+
+  //printTicTacToe(position, logo, size, win);
 }
 
 void printTicTacToe(char position, char logo, char size, char win){
@@ -61,48 +66,45 @@ void printTicTacToe(char position, char logo, char size, char win){
   int baud = 9600;
   //file descriptor
   int fd = -1;
-  //string to write
-  const char* str = malloc(500);
-  const char* final = "\n\t";
 
 
   //string to concatenate
   //lvl 2
-  const char* horizontal22 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
-  const char* horizontal21 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
-  const char* horizontal20 = "wwwwwwww";
-  const char* vertical22 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  const char* horizontal22 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n\r";
+  const char* horizontal21 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n\r";
+  const char* horizontal20 = "wwwwwwww\n\r";
+  const char* vertical22 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n\r";
   const char* vertical21 = "a";
-  const char* vertical20 = "ddddddddddddddddddddddddddddd";
+  const char* vertical20 = "ddddddddddddddddddddddddddddd\n\r";
 
   //lvl 1
-  const char* horizontal12 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
-  const char* horizontal11 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
-  const char* horizontal10 = "wwwwwwwwwwwwwwwwwwwww";
-  const char* vertical12 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-  const char* vertical11 = "aaaaaaaaa";
-  const char* vertical10 = "dddddddddddddddddddddddd";
+  const char* horizontal12 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n\r";
+  const char* horizontal11 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n\r";
+  const char* horizontal10 = "wwwwwwwwwwwwwwwwwwwww\n\r";
+  const char* vertical12 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n\r";
+  const char* vertical11 = "aaaaaaaaa\n\r";
+  const char* vertical10 = "dddddddddddddddddddddddd\n\r";
 
   //lvl 0
-  const char* horizontal02 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
-  const char* horizontal01 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww";
-  const char* horizontal00 = "wwwwwwwwwwwwwwwwwwwwwwwwwww";
-  const char* vertical02 = "aaaaaaaaaaaaaaaaaaaaaa";
-  const char* vertical01 = "aaaaaaa";
-  const char* vertical00 = "ddddddddd";
+  const char* horizontal02 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n\r";
+  const char* horizontal01 = "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n\r";
+  const char* horizontal00 = "wwwwwwwwwwwwwwwwwwwwwwwwwww\n\r";
+  const char* vertical02 = "aaaaaaaaaaaaaaaaaaaaaa\n\r";
+  const char* vertical01 = "aaaaaaa\n\r";
+  const char* vertical00 = "ddddddddd\n\r";
 
   //logo0
-  const char* logo1 = "sssssssssss";
+  const char* logo1 = "sssssssssss\n\r";
   //logo1
-  const char* logo2 = "aaaaaaaaaaaaaaa";
+  const char* logo2 = "aaaaaaaaaaaaaaa\n\r";
   //logo2
-  const char* logo3 = "sssssssssssaaaaaaaaaaa";
+  const char* logo3 = "sssssssssssaaaaaaaaaaa\n\r";
 
   //pencil down
-  const char* down = "ooooooooooooo";
+  const char* down = "ooooooooooooo\n\r";
 
   //pencil up
-  const char* up = "lllllll";
+  const char* up = "lllllll\n\r";
 
   //init conection
   fd = serialport_init(serialport,baud);
@@ -116,323 +118,373 @@ void printTicTacToe(char position, char logo, char size, char win){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal00);
-          strcpy(str,vertical00);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical00);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal00);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal00);
-          strcpy(str,vertical00);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          printf("%s/n",str)
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical00);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '1'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal00);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal00);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal00);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
         }
       }
       else if(position == '2'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal00);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal00);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal00);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal00);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '3'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal01);
-          strcpy(str,vertical00);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical00);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal01);
-          strcpy(str,vertical00);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical00);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal01);
-          strcpy(str,vertical00);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical00);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '4'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal01);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal01);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal01);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '5'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal01);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal01);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal01);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal01);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '6'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal02);
-          strcpy(str,vertical00);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal02);
+          serialport_write(fd,vertical00);
+          serialport_write(fd,down);
+          serialport_write(fd,logo1);
+          serialport_write(fd,up);
+          
+          
+          
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal02);
-          strcpy(str,vertical00);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal02);
+          serialport_flush(fd);
+          serialport_write(fd,vertical00);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal02);
-          strcpy(str,vertical00);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal02);
+          serialport_flush(fd);
+          serialport_write(fd,vertical00);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '7'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal02);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
+          serialport_write(fd,horizontal02);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal02);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal02);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal02);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal02);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '8'){
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal02);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal02);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal02);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal02);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal02);
-          strcpy(str,vertical02);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal02);
+          serialport_flush(fd);
+          serialport_write(fd,vertical02);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
     }
@@ -441,323 +493,378 @@ void printTicTacToe(char position, char logo, char size, char win){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal10);
-          strcpy(str,vertical10);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical10);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal10);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal10);
-          strcpy(str,vertical10);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical10);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '1'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal10);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal10);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal10);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '2'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal10);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal10);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal10);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal10);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '3'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal11);
-          strcpy(str,vertical10);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical10);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal11);
-          strcpy(str,vertical10);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical10);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal11);
-          strcpy(str,vertical10);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical10);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '4'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal11);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal11);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal11);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '5'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal11);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal11);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal11);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal11);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '6'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal12);
-          strcpy(str,vertical10);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical10);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal12);
-          strcpy(str,vertical10);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical10);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal12);
-          strcpy(str,vertical10);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical10);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '7'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal12);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal12);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal12);
-          strcpy(str,vertical11);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical11);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '8'){
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal12);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal12);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal12);
-          strcpy(str,vertical12);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal12);
+          serialport_flush(fd);
+          serialport_write(fd,vertical12);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
     }
@@ -767,36 +874,42 @@ void printTicTacToe(char position, char logo, char size, char win){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal20);
-          strcpy(str,vertical20);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical20);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal20);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal20);
-          strcpy(str,vertical20);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical20);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         }
       }
@@ -804,297 +917,345 @@ void printTicTacToe(char position, char logo, char size, char win){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal20);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal20);
-          strcpy(str,vertical01);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical01);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal20);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '2'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal20);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal20);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal20);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal20);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '3'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal21);
-          strcpy(str,vertical20);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical20);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal21);
-          strcpy(str,vertical20);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical20);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal21);
-          strcpy(str,vertical20);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical20);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '4'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal21);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal21);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal21);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '5'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal21);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal21);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal21);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal21);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '6'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal22);
-          strcpy(str,vertical20);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical20);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal22);
-          strcpy(str,vertical20);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical20);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal22);
-          strcpy(str,vertical20);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical20);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '7'){
         //write to de fie
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal22);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal22);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal22);
-          strcpy(str,vertical21);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical21);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
       else if(position == '8'){
         if(logo == '1'){
           //logo one line
-          strcpy(str,horizontal22);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo1);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '2'){
           //logo 2 lines
-          strcpy(str,horizontal22);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo2);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo2);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
         else if(logo == '3'){
           //logo 3 lines
-          strcpy(str,horizontal22);
-          strcpy(str,vertical22);
-          strcpy(str,down);
-          strcpy(str,logo3);
-          strcpy(str,up);
-          strcpy(str,final);
-          serialport_write(fd,str);
-          str = "";
+          serialport_write(fd,horizontal22);
+          serialport_flush(fd);
+          serialport_write(fd,vertical22);
+          serialport_flush(fd);
+          serialport_write(fd,down);
+          serialport_flush(fd);
+          serialport_write(fd,logo3);
+          serialport_flush(fd);
+          serialport_write(fd,up);
+          serialport_flush(fd);
         }
       }
     }
   }
   else{
     if(win == '1'){
-      str = "";
-    }
-    else{
-      str = "";
+      if(logo == '1'){
+          serialport_write(fd,logo1);
+          serialport_flush(fd);
+      }
     }
   }
 
