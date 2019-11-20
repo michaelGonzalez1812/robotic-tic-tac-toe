@@ -5,6 +5,9 @@ oooooooossssssssssssssssssssssssssssssdddddddddddddddllllllll
 ### C ###
 # Prerequisites
 *.d
+#class/
+
+*back.c
 
 # Object files
 *.o
