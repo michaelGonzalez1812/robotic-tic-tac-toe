@@ -579,6 +579,7 @@ error_init_termios:
 
 static int acm_tty_open(struct tty_struct *tty, struct file *filp)
 {
+	printk("Brazo robotico inicializado\n");
 	struct acm *acm = tty->driver_data;
 
 	return tty_port_open(&acm->port, tty, filp);
@@ -1676,6 +1677,7 @@ static const struct tty_operations acm_ops = {
 
 static int __init acm_init(void)
 {
+	printk("Brazo robotico inicializado 1\n");
 	int retval;
 	acm_tty_driver = alloc_tty_driver(ACM_TTY_MINORS);
 	if (!acm_tty_driver)

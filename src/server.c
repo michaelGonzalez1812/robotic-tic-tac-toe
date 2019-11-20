@@ -47,12 +47,7 @@ void command_identifier(char commands[]){
   char size = commands[27];
   char win = commands[35];
 
-  printf("position %c\n",position);
-  printf("logo %c\n",logo);
-  printf("size %c\n",size);
-  printf("win %c\n\n",win);
-
-  //printTicTacToe(position, logo, size, win);
+  printTicTacToe(position, logo, size, win);
 }
 
 void printTicTacToe(char position, char logo, char size, char win){
@@ -61,7 +56,7 @@ void printTicTacToe(char position, char logo, char size, char win){
   printf("logo %c\n",logo);
   printf("size %c\n",size);
   printf("win %c\n\n",win);
-  const char* serialport = "/dev/ttyACM0";
+  const char* serialport = "/dev/ttyACMard1";
   //baudio
   int baud = 9600;
   //file descriptor
@@ -101,7 +96,7 @@ void printTicTacToe(char position, char logo, char size, char win){
   const char* logo3 = "sssssssssssaaaaaaaaaaa\n\r";
 
   //pencil down
-  const char* down = "ooooooooooooo\n\r";
+  const char* down = "oooooooooooooo\n\r";
 
   //pencil up
   const char* up = "lllllll\n\r";
