@@ -21,7 +21,7 @@ export class Header extends React.Component {
                     />
                     
                     <Text style={styles.info}>
-                        Score: {this.props.screenProps.player2Score}
+                        Score: {this.props.screenProps.player1Score}
                     </Text>
                 </View>
                 <Text>                      </Text>
