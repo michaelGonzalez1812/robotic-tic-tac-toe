@@ -144,7 +144,7 @@ void printTicTacToe(char position, char logo, char size, char win){
           strcpy(str,logo3);
           strcpy(str,up);
           strcpy(str,final);
-          printf("%s/n",str);
+          printf("%s/n",str)
           serialport_write(fd,str);
           str = "";
         }
