@@ -34,6 +34,15 @@ chmod +x comp.sh
 This script compile and load the module to the kernel.
 Notice this driver was writted to 4.19 linux kernel.
 
+## Run the RFS6455 connector ##
+
+Yo can choose your port and address
+
+```
+gwsocket --access-log=/tmp/access.log -p 3000 --addr=192.168.0.6
+```
+
+
 ## Instructions for server
 
 ```
